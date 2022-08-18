@@ -65,8 +65,8 @@ Reference for each minted data source for your output data.  For example:
 You need to follow two major steps to reproduce this study: 
 
 
-1. Run the [Mesh generation workflow](https://github.com/DOE-ICoM/pyhexwatershed_james/blob/main/workflow/mesh_generation.md)
-2. Run the [HexWatershed](https://github.com/DOE-ICoM/pyhexwatershed_james/blob/main/workflow/hexwatershed.md)
+1. Run the [Mesh generation workflow](https://github.com/DOE-ICoM/liao-etal_2022_hexwatershed_james/blob/main/workflow/mesh_generation.md)
+2. Run the [HexWatershed](https://github.com/DOE-ICoM/liao-etal_2022_hexwatershed_james/blob/main/workflow/hexwatershed.md)
 
 
 ## Reproduce my figures
