@@ -9,7 +9,7 @@ We analyze the model outputs both quantitatively (statistics) and visually (maps
 
 | Attribute | Map| Statistics | Note |
 |-------|---------|-----------------|-----|
-| Surface elevation | Yes | NaN | Hydrology model | 
+| Surface elevation | Yes | NaN | Full domain elevation in different cases | 
 | Channel elevation | NaN | Yes | Hydrology model | 
 | Surface slope | Yes | NaN | Hydrology model | 
 | Channel slope | NaN | Yes | Hydrology model | 
