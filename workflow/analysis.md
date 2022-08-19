@@ -9,13 +9,13 @@ We analyze the model outputs both quantitatively (statistics) and visually (maps
 
 | Attribute | Map| Statistics | Note |
 |-------|---------|-----------------|-----|
-| Surface elevation | Yes | NaN | Full domain elevation in different cases | 
-| Channel elevation | NaN | Yes | Hydrology model | 
-| Surface slope | Yes | NaN | Hydrology model | 
-| Channel slope | NaN | Yes | Hydrology model | 
-| Raparian zone slope | NaN | Yes | Hydrology model |
-| Flow direction | Yes | NaN | Hydrology model | 
-| Distance to outlet | Yes | Yes | Hydrology model | 
+| Surface elevation | Yes | No | Full domain elevation in different cases | 
+| Channel elevation | No | Yes | Only in stream cells | 
+| Surface slope | Yes | No | Full domain | 
+| Channel slope | No | Yes | Only in stream cells | 
+| Raparian zone slope | No | Yes | Only in neighboring cells of streams |
+| Flow direction | Yes | No | Full domain | 
+| Distance to outlet | No | Yes | Full domain| 
 | Stream segment | Yes | Yes | https://github.com/changliao1025/hexwatershed/issues/9#issuecomment-1220952399 | 
-| Drainage area | Yes | Yes | Hydrology model | 
+| Drainage area | Yes | Yes | Full domain | 
 
