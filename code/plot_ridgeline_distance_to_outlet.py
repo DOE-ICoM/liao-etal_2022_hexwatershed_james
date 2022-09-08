@@ -1,3 +1,4 @@
+
 import os, sys, stat
 from pathlib import Path
 from os.path import realpath
@@ -26,6 +27,7 @@ for i in range(1, nCase +1):
 print(case_dict)
 
 aData = list()
+dMax_x=0.0
 for iCase_index in range(1, nCase +1):
     aData_case=list()
     #read data
@@ -51,15 +53,16 @@ for iCase_index in range(1, nCase +1):
                 pcell = data[i]
                 lCellID = int(pcell['lCellID'])
                 iSegment = int(pcell['iSegment'])
-                dElevation=float(pcell['Elevation'])  
-                if iSegment >=1:
-                    aData_case.append(dElevation)
-                else:
-                    pass
+                dDrainagearea=float(pcell['dDistance_to_watershed_outlet'])  
+                
+                aData_case.append(dDrainagearea)
+                if dDrainagearea > dMax_x:
+                    dMax_x = dDrainagearea
+                
     
     aData.append(aData_case)
-sFilename_out = sPath_parent + '/' + 'figures' + '/' + 'channel_elevation.png'
-sLabel_x = 'Channel elevation (m)'
-ridgeplot_data_density(case_dict, aData, sFilename_out, dMin_x_in =-10, dMax_x_in= 1000,sLabel_x_in =sLabel_x)
+sFilename_out = sPath_parent + '/' + 'figures' + '/' + 'distance_to_outlet.png'
+sLabel_x = r'Distance to outlet (m)'
+ridgeplot_data_density(case_dict, aData, sFilename_out, dMin_x_in =0, dMax_x_in= dMax_x,sLabel_x_in =sLabel_x)
 pass
 

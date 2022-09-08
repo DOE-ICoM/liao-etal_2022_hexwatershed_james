@@ -51,15 +51,15 @@ for iCase_index in range(1, nCase +1):
                 pcell = data[i]
                 lCellID = int(pcell['lCellID'])
                 iSegment = int(pcell['iSegment'])
-                dElevation=float(pcell['Elevation'])  
+                dSlope_between=float(pcell['dSlope_between'])  
                 if iSegment >=1:
-                    aData_case.append(dElevation)
+                    aData_case.append(dSlope_between)
                 else:
                     pass
     
     aData.append(aData_case)
-sFilename_out = sPath_parent + '/' + 'figures' + '/' + 'channel_elevation.png'
-sLabel_x = 'Channel elevation (m)'
-ridgeplot_data_density(case_dict, aData, sFilename_out, dMin_x_in =-10, dMax_x_in= 1000,sLabel_x_in =sLabel_x)
+sFilename_out = sPath_parent + '/' + 'figures' + '/' + 'channel_slope.png'
+sLabel_x = 'Channel slope (percent)'
+ridgeplot_data_density(case_dict, aData, sFilename_out, dMin_x_in =0, dMax_x_in= 0.015, sLabel_x_in = sLabel_x)
 pass
 

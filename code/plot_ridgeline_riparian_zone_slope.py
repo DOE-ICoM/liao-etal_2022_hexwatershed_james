@@ -50,16 +50,22 @@ for iCase_index in range(1, nCase +1):
             for i in range(ncell):
                 pcell = data[i]
                 lCellID = int(pcell['lCellID'])
-                iSegment = int(pcell['iSegment'])
-                dElevation=float(pcell['Elevation'])  
+                iSegment = int(pcell['iSegment'])                 
                 if iSegment >=1:
-                    aData_case.append(dElevation)
+                    for j in range(ncell):
+                        pcell2 = data[j]
+                        lCellID_downslope = int(pcell2['lCellID_downslope'])
+                        iSegment2 = int(pcell2['iSegment'])
+                        dSlope_between=float(pcell2['dSlope_between']) 
+                        if lCellID_downslope == lCellID:
+                            if iSegment2 < 0: 
+                                aData_case.append(dSlope_between)
                 else:
                     pass
     
     aData.append(aData_case)
-sFilename_out = sPath_parent + '/' + 'figures' + '/' + 'channel_elevation.png'
-sLabel_x = 'Channel elevation (m)'
-ridgeplot_data_density(case_dict, aData, sFilename_out, dMin_x_in =-10, dMax_x_in= 1000,sLabel_x_in =sLabel_x)
+sFilename_out = sPath_parent + '/' + 'figures' + '/' + 'riparian_zone_slope.png'
+sLabel_x = 'Riparian zone slope (percent)'
+ridgeplot_data_density(case_dict, aData, sFilename_out, dMin_x_in =0, dMax_x_in= 0.1, sLabel_x_in = sLabel_x)
 pass
 
