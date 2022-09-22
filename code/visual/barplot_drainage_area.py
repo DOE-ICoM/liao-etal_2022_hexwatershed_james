@@ -30,6 +30,8 @@ for i in range(1, nCase +1):
 print(case_dict)
 
 aData = list()
+dDrainge_wbd = 
+aData.append(dDrainge_wbd)
 for iCase_index in range(1, nCase +1):
     pass
 
@@ -46,15 +48,16 @@ iSize_x = 12
 iSize_y =  9
 iDPI = 150
 nData= 6
-aColor= np.array(create_diverge_rgb_color_hex( 6 ))
+aColor= np.array(create_diverge_rgb_color_hex( 8 ))
+
 sWorkspace_output = '/compyfs/liao313/04model/pyflowline/susquehanna/'
 
-aLinestyle = np.array([  'dotted',  'dotted'  , 'solid', 'solid', 'solid', 'dashdot'])
-aMarker=  np.array([  '+',  '^'  , 'o', 'p', 'd', '*'])
+aLinestyle = np.array([  'dotted',  'dotted'  , 'solid', 'solid', 'dotted','dotted' 'dashdot','dashdot'])
+aMarker=  np.array([  '+',  '^'  , 'o', 'p', 'd', '*', '+',  '^'  ])
 
-aLabel_legend= np.array(['Latlon','Square','Hexagon','MPAS'])
-aHatch = np.array([ '.',   '*', '+', '|', '-', 'o'])
-aSubset_index = np.arange(4) + 2
+aLabel_legend= np.array(['WBD','Latlon','Square','Hexagon','MPAS'])
+aHatch = np.array([ '.',   '*', '+', '|', '-', 'o',  '.',   '*',])
+aSubset_index = np.arange(4) + 1
 
 sFormat_x = ''
 
@@ -62,7 +65,7 @@ sFormat_y = '%.1f'
 
 
 
-aReference_in= []
+aReference_in= [0]
 barplot_data_with_reference(aData, \
              aResolution, \
              aLabel_legend[aSubset_index],\
