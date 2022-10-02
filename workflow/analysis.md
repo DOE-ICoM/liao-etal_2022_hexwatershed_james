@@ -19,3 +19,7 @@ We analyze the model outputs both quantitatively (statistics) and visually (maps
 | Stream segment | Yes | Yes | https://github.com/changliao1025/hexwatershed/issues/9#issuecomment-1220952399 | 
 | Drainage area | Yes | Yes | Full domain | 
 
+
+## Number of cells
+
+

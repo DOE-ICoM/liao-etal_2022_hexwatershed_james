@@ -9,7 +9,7 @@ from pyhexwatershed.pyhexwatershed_read_model_configuration_file import pyhexwat
 
 
 # getting the data
-sPath_parent = str(Path(__file__).parents[1]) # data is located two dir's up
+sPath_parent = str(Path(__file__).parents[2]) # data is located two dir's up
 print(sPath_parent)
 sPath_data = realpath( sPath_parent +  '/data/susquehanna' )
 sWorkspace_input =  str(Path(sPath_data)  /  'input')
@@ -60,6 +60,6 @@ for iCase_index in range(1, nCase +1):
     aData.append(aData_case)
 sFilename_out = sPath_parent + '/' + 'figures' + '/' + 'channel_elevation.png'
 sLabel_x = 'Channel elevation (m)'
-ridgeplot_data_density(case_dict, aData, sFilename_out, dMin_x_in =-10, dMax_x_in= 1000,sLabel_x_in =sLabel_x)
+ridgeplot_data_density(case_dict, aData, sFilename_out, dMin_x_in =-200, dMax_x_in=900,sLabel_x_in =sLabel_x)
 pass
 

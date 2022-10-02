@@ -10,7 +10,7 @@ from pyhexwatershed.pyhexwatershed_read_model_configuration_file import pyhexwat
 
 
 # getting the data
-sPath_parent = str(Path(__file__).parents[1]) # data is located two dir's up
+sPath_parent = str(Path(__file__).parents[2]) # data is located two dir's up
 print(sPath_parent)
 sPath_data = realpath( sPath_parent +  '/data/susquehanna' )
 sWorkspace_input =  str(Path(sPath_data)  /  'input')
@@ -21,13 +21,11 @@ sDate='20220901'
 # we define a dictionnary with months that we'll use later
 case_dict = dict()
 
-for i in range(1, nCase +1):
-    case_dict[i] = 'Case ' +  "{:0d}".format(i) 
 
-print(case_dict)
 
 aData = list()
 dMax_x=0.0
+aCell_number= list()
 for iCase_index in range(1, nCase +1):
     aData_case=list()
     #read data
@@ -49,6 +47,7 @@ for iCase_index in range(1, nCase +1):
             data = json.load(json_file)  
             ncell = len(data)
             lID =0 
+            aCell_number.append(ncell)
             for i in range(ncell):
                 pcell = data[i]
                 lCellID = int(pcell['lCellID'])
@@ -61,6 +60,13 @@ for iCase_index in range(1, nCase +1):
                 
     
     aData.append(aData_case)
+print(aCell_number)
+
+for i in range(1, nCase +1):
+    case_dict[i] = 'Case ' +  "{:0d}".format(i) + ' number of cells: ' + "{:0d}".format(aCell_number[i-1])
+
+print(case_dict)
+
 sFilename_out = sPath_parent + '/' + 'figures' + '/' + 'drainage_area.png'
 sLabel_x = r'Drainage area ($m^{2}$)'
 ridgeplot_data_density(case_dict, aData, sFilename_out, dMin_x_in =0, dMax_x_in= 0.5*dMax_x,sLabel_x_in =sLabel_x)
