@@ -6,6 +6,7 @@ import numpy as np
 from osgeo import  osr, gdal, ogr
 import matplotlib as mpl
 from pyearth.visual.scatter.scatter_plot_data import scatter_plot_data
+from pyearth.toolbox.reader.text_reader_string import text_reader_string
 from pyearth.visual.scatter.scatter_plot_multiple_data import scatter_plot_multiple_data
 
 from pyearth.visual.color.create_diverge_rgb_color_hex import create_diverge_rgb_color_hex
@@ -13,7 +14,7 @@ from pyhexwatershed.pyhexwatershed_read_model_configuration_file import pyhexwat
 from pyflowline.formats.read_flowline import read_flowline_geojson
 from shapely.wkt import loads
 from shapely.geometry import Point, Polygon
-sPath_parent = str(Path(__file__).parents[2]) # data is located two dir's up
+sPath_parent = str(Path(__file__).parents[3]) # data is located two dir's up
 print(sPath_parent)
 sPath_data = realpath( sPath_parent +  '/data/susquehanna' )
 sWorkspace_input =  str(Path(sPath_data)  /  'input')
@@ -49,7 +50,7 @@ for iCase_index in range(1, nCase+1):
         sFilename_mesh=   oPyhexwatershed.pPyFlowline.sFilename_mesh
         sWatershed = "{:04d}".format(iWatershed) 
         sWorkspace_watershed = sWorkspace_watershed =  os.path.join( sWorkspace_output_hexwatershed,  sWatershed )
-        sFilename_json = os.path.join(sWorkspace_output_hexwatershed ,   'travel_distance.geojson')
+        sFilename_json = os.path.join(sWorkspace_watershed ,   'travel_distance.geojson')
         pDriver = ogr.GetDriverByName('GeoJSON')
         pDataset = pDriver.Open(sFilename_json, gdal.GA_ReadOnly)
         pLayer = pDataset.GetLayer(0)
@@ -171,9 +172,9 @@ sFilename_out = sPath_parent + '/' + 'figures' + '/' + 'scatterplot_travel_dista
 #                      sLabel_legend_in = 'Susquehanna river basin',\
 #                      sTitle_in = 'Travel distance')
 
-aColor = np.full(14, None, dtype=object)
-aMarker= np.full(14, None, dtype=object)
-aSize = np.full(14, None, dtype=object)
+aColor = np.full(15, None, dtype=object)
+aMarker= np.full(15, None, dtype=object)
+aSize = np.full(15, None, dtype=object)
 
 nmesh=4
 aColor0= create_diverge_rgb_color_hex(nmesh)
@@ -190,6 +191,22 @@ for i in range(nCase):
     else:
         aSize[i] = mpl.rcParams['lines.markersize'] ** 2 
 
+
+#read drt csv
+
+sFilename_drt = sPath_parent + '/' + 'data/travel_distance' + '/' + 'drt_travel_distance.csv'
+a =  text_reader_string(sFilename_drt,cDelimiter_in=',')
+aX_obs= a[:,0].astype(float)
+aY_obs= a[:,1].astype(float)
+aX_obs = np.reshape(aX_obs, len(aX_obs))
+aY_obs = np.reshape(aY_obs, len(aY_obs))
+
+aData_x.append(aX_obs) #all obs 
+aData_y.append(aY_obs)
+aColor[14] = '#000000'
+aMarker[14]= 'o'
+aSize[14] = mpl.rcParams['lines.markersize'] ** 2 * 2
+aLabel_legend.append('DRT')
 
 
 scatter_plot_multiple_data(aData_x, \
