@@ -244,7 +244,7 @@ aSize[14] = mpl.rcParams['lines.markersize']
 aLinestyle[14] = '-'
 aLinewidth[14] = mpl.rcParams['lines.linewidth'] 
 
-aLabel_legend.append('NHD')
+aLabel_legend.append('NHD/NED')
 
 sFormat_x =  '%.1E'
 ladder_plot_xy_data(aX_all,  aY_all,  \
