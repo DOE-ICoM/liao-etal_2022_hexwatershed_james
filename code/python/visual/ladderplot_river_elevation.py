@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from pyearth.toolbox.reader.text_reader_string import text_reader_string
 from pyhexwatershed.pyhexwatershed_read_model_configuration_file import pyhexwatershed_read_model_configuration_file
 import matplotlib as mpl
-
+plt.rcParams["font.family"] = "Times New Roman"
 from pyearth.visual.ladder.ladder_plot_xy_data import ladder_plot_xy_data
 from pyearth.visual.color.create_diverge_rgb_color_hex import create_diverge_rgb_color_hex
 # getting the data
@@ -20,7 +20,7 @@ sPath_data = realpath( sPath_parent +  '/data/susquehanna' )
 sWorkspace_input =  str(Path(sPath_data)  /  'input')
 sWorkspace_output = '/compyfs/liao313/04model/pyhexwatershed/susquehanna'
 nCase  = 14
-sDate='20220901'
+sDate='20230701'
 
 # we define a dictionnary with months that we'll use later
 case_dict = dict()
@@ -78,10 +78,11 @@ for iCase_index in range(1, nCase +1):
 
     aPolygon_case_cellid=list()
     for iWatershed in range(1, 2):#there is only one watershed in this study
-        Basin=   oPyhexwatershed.pPyFlowline.aBasin[iWatershed-1]
+        pBasin_hexwatershed=   oPyhexwatershed.aBasin[iWatershed-1]
         sWatershed = "{:04d}".format(iWatershed) 
-        sWorkspace_watershed = sWorkspace_watershed =  os.path.join( sWorkspace_output_hexwatershed,  sWatershed )
-        sFilename_json = os.path.join(sWorkspace_watershed ,   'watershed.json')
+        pBasin_hexwatershed = oPyhexwatershed.aBasin[0]
+        sWorkspace_output_basin = pBasin_hexwatershed.sWorkspace_output_basin       
+        sFilename_json = pBasin_hexwatershed.sFilename_watershed_json
         with open(sFilename_json) as json_file:
             data = json.load(json_file)  
             ncell = len(data)
@@ -106,8 +107,8 @@ for iCase_index in range(1, nCase +1):
         aDistance_case = list(np.array(aDistance_case)[sort_index])
                 
         
-        sWorkspace_watershed = sWorkspace_watershed =  os.path.join( sWorkspace_output_hexwatershed,  sWatershed )
-        sFilename_json = os.path.join(sWorkspace_watershed ,   'travel_distance.geojson')
+        
+        sFilename_json = pBasin_hexwatershed.sFilename_variable_polygon
         pDriver = ogr.GetDriverByName('GeoJSON')
         pDataset = pDriver.Open(sFilename_json, gdal.GA_ReadOnly)
         pLayer = pDataset.GetLayer(0)
@@ -115,11 +116,10 @@ for iCase_index in range(1, nCase +1):
         pSrs = osr.SpatialReference()  
         pSrs.ImportFromEPSG(4326)    # WGS84 lat/lon
         
-
         for pFeature in pLayer:
             pGeometry_in = pFeature.GetGeometryRef()
             sGeometry_type = pGeometry_in.GetGeometryName()
-            dummyid= pFeature.GetField("id")
+            dummyid= pFeature.GetField("cellid")
             lID =0 
             if sGeometry_type =='POLYGON':
                 dummy0 = loads( pGeometry_in.ExportToWkt() )
@@ -128,9 +128,7 @@ for iCase_index in range(1, nCase +1):
                 aPolygon_case_cellid.append(dummyid)
                 #dTravel = pFeature.GetField("dist")
                 #aDistance_case.append(dTravel)
-                
-                
-        
+       
             
     #re-order 
     s = np.array(aPolygon_case_cellid)

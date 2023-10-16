@@ -88,26 +88,26 @@ for iResolution in range(1, nResolution+1):
 
             #polyline
             sFilename = os.path.join( sWorkspace_output_basin, 'flow_direction.png' )
-            #oPyhexwatershed.plot( sVariable_in = 'flow_direction', sFilename_output_in = sFilename, iFont_size_in= 16)
+            #oPyhexwatershed.plot( sVariable_in = 'flow_direction', sFilename_output_in = sFilename, iFont_size_in= 24)
 
             #polygon    
             sFilename = os.path.join(  sWorkspace_output_basin, 'surface_elevation.png' )    
-            #oPyhexwatershed.plot( sVariable_in = 'elevation', sFilename_output_in = sFilename, iFont_size_in= 16, dData_min_in=0, dData_max_in=800, iFlag_colorbar_in = 0)     
+            #oPyhexwatershed.plot( sVariable_in = 'elevation', sFilename_output_in = sFilename, iFont_size_in= 24, dData_min_in=0, dData_max_in=800, iFlag_colorbar_in = 0)     
 
             sFilename = os.path.join(  sWorkspace_output_basin, 'surface_slope.png' )        
-            #oPyhexwatershed.plot( sVariable_in = 'slope', sFilename_output_in = sFilename, iFont_size_in= 16, dData_min_in=0, dData_max_in=0.1 , iFlag_colorbar_in = 0)
+            #oPyhexwatershed.plot( sVariable_in = 'slope', sFilename_output_in = sFilename, iFont_size_in= 24, dData_min_in=0, dData_max_in=0.1 , iFlag_colorbar_in = 0)
 
             sFilename = os.path.join( sWorkspace_output_basin, 'drainage_area.png' )
-            #oPyhexwatershed.plot( sVariable_in = 'drainage_area',  sFilename_output_in = sFilename, iFont_size_in= 16, dData_min_in=0, dData_max_in=1E10,  iFlag_colorbar_in = 0 )
+            #oPyhexwatershed.plot( sVariable_in = 'drainage_area',  sFilename_output_in = sFilename, iFont_size_in= 24, dData_min_in=0, dData_max_in=1E10,  iFlag_colorbar_in = 0 )
 
             sFilename = os.path.join(  sWorkspace_output_basin, 'travel_distance.png' )
-            oPyhexwatershed.plot( sVariable_in = 'travel_distance', sFilename_output_in = sFilename, iFont_size_in= 16, dData_min_in=0, dData_max_in=1E6 , iFlag_colorbar_in = 0)
+            #oPyhexwatershed.plot( sVariable_in = 'travel_distance', sFilename_output_in = sFilename, iFont_size_in= 24, dData_min_in=0, dData_max_in=1E6 , iFlag_colorbar_in = 0)
             #mixed
             sFilename = os.path.join( sWorkspace_output_basin, 'flow_direction_w_mesh.png' )
             #oPyhexwatershed.plot( sVariable_in = 'flow_direction_with_mesh', sFilename_output_in = sFilename)  
 
             sFilename = os.path.join(  sWorkspace_output_basin, 'flow_direction_w_observation.png' )
-            #oPyhexwatershed.plot( sVariable_in = 'flow_direction_with_observation',  sFilename_output_in = sFilename, iFont_size_in= 16 )
+            oPyhexwatershed.plot( sVariable_in = 'flow_direction_with_observation',  sFilename_output_in = sFilename, iFont_size_in= 24 )
 
         iCase_index = iCase_index + 1
 

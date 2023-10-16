@@ -5,17 +5,17 @@ import json
 import numpy as np
 from pyearth.visual.ridgeplot.ridgeplot_data_density import ridgeplot_data_density
 from pyhexwatershed.pyhexwatershed_read_model_configuration_file import pyhexwatershed_read_model_configuration_file
-
-
+import matplotlib.pyplot as plt
+plt.rcParams["font.family"] = "Times New Roman"
 
 # getting the data
-sPath_parent = str(Path(__file__).parents[2]) # data is located two dir's up
+sPath_parent = str(Path(__file__).parents[3]) # data is located two dir's up
 print(sPath_parent)
 sPath_data = realpath( sPath_parent +  '/data/susquehanna' )
 sWorkspace_input =  str(Path(sPath_data)  /  'input')
 sWorkspace_output = '/compyfs/liao313/04model/pyhexwatershed/susquehanna'
 nCase  = 14
-sDate='20220901'
+sDate='20230701'
 
 # we define a dictionnary with months that we'll use later
 case_dict = dict()
@@ -39,10 +39,11 @@ for iCase_index in range(1, nCase +1):
           sDate_in= sDate)  
     sWorkspace_output_hexwatershed = oPyhexwatershed.sWorkspace_output_hexwatershed
     for iWatershed in range(1, 2):#there is only one watershed in this study
-        Basin=   oPyhexwatershed.pPyFlowline.aBasin[iWatershed-1]
+        pBasin_hexwatershed=   oPyhexwatershed.aBasin[iWatershed-1]
         sWatershed = "{:04d}".format(iWatershed) 
-        sWorkspace_watershed = sWorkspace_watershed =  os.path.join( sWorkspace_output_hexwatershed,  sWatershed )
-        sFilename_json = os.path.join(sWorkspace_watershed ,   'watershed.json')
+        pBasin_hexwatershed = oPyhexwatershed.aBasin[0]
+        sWorkspace_output_basin = pBasin_hexwatershed.sWorkspace_output_basin       
+        sFilename_json = pBasin_hexwatershed.sFilename_watershed_json
         with open(sFilename_json) as json_file:
             data = json.load(json_file)  
             ncell = len(data)
